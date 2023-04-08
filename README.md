@@ -1,4 +1,4 @@
-# YZU Campus Login
+# YZU CampusNet Login
 
 扬州大学校园网登录器
 
