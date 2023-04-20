@@ -73,6 +73,11 @@ docker run \
     yzu_campusnet_login
 ```
 
+### Docker Compose
+
+此方法建议创建`.env`文件，然后直接运行```docker compose up -d --build```即可。
+
+
 ## 免责说明
 
 YZU Campus Login（以下简称“本脚本”）为便于作者个人生活的脚本，本脚本所用的方法均为对正常登录过的模拟，不得用于任何商业用途。

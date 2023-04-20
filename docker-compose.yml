@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  login:
+    build: .
+    container_name: yzu_campusnet_login
+    restart: always
+    environment:
+      - TZ=Asia/Taipei
+      - SSO_USERNAME
+      - SSO_PASSWORD
+      - CAMPUSNET_SERVICE
+    network_mode: host
