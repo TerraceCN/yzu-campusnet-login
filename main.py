@@ -15,7 +15,7 @@ def test_connection() -> bool:
             httpx.get("http://connect.rom.miui.com/generate_204", timeout=5).status_code
             == 204
         )
-    except httpx.TimeoutException:
+    except Exception as e:
         return False
 
 
