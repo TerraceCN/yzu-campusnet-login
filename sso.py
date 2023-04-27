@@ -52,6 +52,9 @@ ERROR_MSG_CODE = {
     "2040003": "验证码有误，请确认后重新输入",
 }
 
+SSO_IP = "58.192.134.14"
+SSO_HOST = "sso.yzu.edu.cn"
+
 
 def encrypt(croypto, password):
     return b64encode(
@@ -78,7 +81,9 @@ class SSO:
 
     def get_login_params(self, service: Optional[str] = None):
         resp = self.client.get(
-            "https://sso.yzu.edu.cn/login", params={"service": service}
+            f"https://{SSO_HOST}/login",
+            params={"service": service},
+            headers={"Host": SSO_HOST},
         )
         resp.raise_for_status()
         html = resp.text
@@ -90,7 +95,7 @@ class SSO:
     def login(self, username: str, password: str, service: Optional[str] = None):
         params = self.get_login_params(service)
         resp = self.client.post(
-            "https://sso.yzu.edu.cn/login",
+            f"https://{SSO_HOST}/login",
             data={
                 "username": username,
                 "type": "UsernamePassword",
@@ -100,6 +105,7 @@ class SSO:
                 "croypto": params["croypto"],
                 "password": encrypt(params["croypto"], password),
             },
+            headers={"Host": SSO_HOST},
         )
 
         if resp.status_code == 401:
