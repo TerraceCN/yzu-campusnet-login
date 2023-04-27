@@ -19,11 +19,6 @@ def test_connection() -> bool:
         return False
 
 
-def wait_forever():
-    while True:
-        time.sleep(60)
-
-
 connected = False
 while True:
     if not DEBUG and test_connection():
@@ -33,6 +28,9 @@ while True:
         time.sleep(CHECK_INTERVAL)
         continue
     connected = False
+
+    logger.info("Start login in 30s...")
+    time.sleep(30)
 
     logger.info(
         f"Username: {SSO_USERNAME}, Password: {SSO_PASSWORD}, Service: {CAMPUSNET_SERVICE}"
@@ -53,21 +51,21 @@ while True:
         logger.info("Portal url: {}", portal_url)
     except Exception as e:
         logger.exception("Failed to get portal url")
-        wait_forever()
+        continue
 
     try:
         sso.login(SSO_USERNAME, SSO_PASSWORD, portal_url)
         logger.info("Login SSO success")
     except Exception as e:
         logger.exception("Failed to login SSO")
-        wait_forever()
+        continue
 
     try:
         services = campus_net.get_services(portal_url)
         logger.info(f"Get services: {', '.join(services.keys())}")
     except Exception as e:
         logger.exception("Failed to get services")
-        wait_forever()
+        continue
 
     if CAMPUSNET_SERVICE not in services:
         logger.error(f"{CAMPUSNET_SERVICE} is not an available service!")
@@ -77,4 +75,4 @@ while True:
         logger.info("Login service success")
     except Exception as e:
         logger.exception("Failed to login services")
-        wait_forever()
+        continue
