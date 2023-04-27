@@ -23,4 +23,5 @@ SSO_PASSWORD = e("SSO_PASSWORD", required=True)
 CAMPUSNET_SERVICE = e("CAMPUSNET_SERVICE", required=True)
 
 CHECK_INTERVAL = int(e("CHECK_INTERVAL", "60"))
+START_DELAY = int(e("START_DELAY", "10"))
 DEBUG = e("DEBUG", "false").lower() in ("true", "1", "yes")

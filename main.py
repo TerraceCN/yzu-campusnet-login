@@ -29,8 +29,8 @@ while True:
         continue
     connected = False
 
-    logger.info("Start login in 10s...")
-    time.sleep(10)
+    logger.info(f"Start login in {START_DELAY}s...")
+    time.sleep(START_DELAY)
 
     logger.info(
         f"Username: {SSO_USERNAME}, Password: {SSO_PASSWORD}, Service: {CAMPUSNET_SERVICE}"
