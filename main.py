@@ -12,7 +12,11 @@ from sso import SSO
 def test_connection() -> bool:
     try:
         return (
-            httpx.get("http://connect.rom.miui.com/generate_204", timeout=5).status_code
+            httpx.get(
+                "http://111.13.141.31/generate_204",
+                headers={"Host": "connect.rom.miui.com"},
+                timeout=5,
+            ).status_code
             == 204
         )
     except Exception as e:
